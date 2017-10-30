@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>iRich 愛記帳</title>
+    <link rel='stylesheet' href='https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/examples/jumbotron/jumbotron.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">iRich 愛記帳</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <a href="/accounts/create" class="btn btn-success">新增消費</a>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>記錄生活中所有花費！</h1>
+        <p>隨手記錄日常花費，成為省錢一姐</p>
+      </div>
+    </div>
+
+    <div class="container">
+        <table class="table table-striped table-hover">
+          <tr>
+            <th class="text-center">No.</th>
+            <th class="text-center">消費名稱</th>
+            <th class="text-center">消費類型</th>
+            <th class="text-center">支出</th>
+            <th class="text-center">操作</th>
+          </tr>
+          <% for(var i=0; i<accounts.length; i++) { %>
+          <tr>
+            <td class="text-center"><%= accounts[i].id %></td>
+            <td class="text-center"><a href="/accounts/<%= accounts[i].id %>"><%= accounts[i].title %></a></td>
+            <td class="text-center"><%= accounts[i].type %></td>
+            <td class="text-center"><%= accounts[i].cost %></td>
+            <td class="text-center">
+              <a class="btn btn-warning" href="/accounts/<%= accounts[i].id %>/update">更新</a> 
+              <form method="POST" action="/accounts/<%= accounts[i].id %>/delete" style="display:inline-block">
+                <button type="submit" class="btn btn-danger">刪除</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </table>
+    </div> <!-- /container -->
+    <hr>
+    <footer>
+      <div class="container">
+        <p>
+          &copy; <script>document.write((new Date()).getFullYear());</script> Company, Inc.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
